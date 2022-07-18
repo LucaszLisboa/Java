@@ -1,11 +1,11 @@
 package dev.lucaslisboa.app.models.products;
 
-public class Chocolate implements HotDrink{
+import dev.lucaslisboa.app.configurations.CONSTANTS;
 
-    private int quantity = 3;
-    private int temperature = 3;
-    private int sugar = 3;
+public class Chocolate extends HotDrink{
 
     public Chocolate() {
+        super(CONSTANTS.CHOCOLATE_DEFAULT);
+
     }
 }

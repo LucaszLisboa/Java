@@ -1,21 +1,12 @@
 package dev.lucaslisboa.app.models.products;
 
-import dev.lucaslisboa.app.models.machines.HotDrinkMachine;
+import dev.lucaslisboa.app.configurations.CONSTANTS;
 
-public class Coffee implements HotDrink {
+public class Coffee extends HotDrink {
 
-    private int quantity = 3;
-    private int temperature = 3;
-    private int sugar = 3;
+    public Coffee() {
+        super(CONSTANTS.COFFEE_DEFAULT);
 
-    public Coffee() {}
-
-    @Override
-    public String toString() {
-        return "COFFEE: {" +
-                "\"quantity\":" + quantity +
-                ", \"temperature\":" + temperature +
-                ", \"sugar\":" + sugar +
-                '}';
     }
+
 }

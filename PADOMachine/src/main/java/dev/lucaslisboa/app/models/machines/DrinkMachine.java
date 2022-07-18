@@ -2,42 +2,45 @@ package dev.lucaslisboa.app.models.machines;
 
 import dev.lucaslisboa.app.models.products.HotDrink;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class DrinkMachine {
 
-    private List<HotDrinkMachine> machines = new ArrayList<>();
+    private List<HotDrinkMachine> machines = List.of(
+            new CoffeeMachine(),
+            new ChocolateMachine(),
+            new TeaMachine());
 
     public DrinkMachine() {
 
-        CoffeeMachine coffeMachine = new CoffeeMachine();
-        TeaMachine teaMachine = new TeaMachine();
-        machines.add(coffeMachine);
-        machines.add(teaMachine);
     }
 
-    public void prepare(){
-
-        System.out.println("Escolha sua bebida:");
-        System.out.println("0 - Coffee");
-        System.out.println("1 - Tea");
-        System.out.println("Escolha: ");
+    public void prepare() throws IOException {
+        System.out.println("Escolha sua bebida!");
         for (int i = 0; i < machines.size(); i++) {
-            machines.get(i).getClass().getSimpleName();
+            System.out.println(i + ". " + machines.get(i).getClass().getSimpleName().replace("Machine", ""));
         }
+        System.out.println("Escolha: ");
 
         while (true){
 
-            Scanner sc = new Scanner(System.in);
-            int valor = Integer.parseInt(sc.nextLine());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+            String line = reader.readLine();
+            int valor = (!line.equalsIgnoreCase("")) ? Integer.parseInt(line) : 99;
+
             System.out.println("Valor informado pelo usuário: "+ valor);
             if(valor < machines.size() && valor >= 0){
                 HotDrink hotDrink = this.machines.get(valor).makeDrink();
                 System.out.println(hotDrink);
+                System.out.println("////////////////////////////////////////////");
+                System.out.println("Escolha: ");
             } else {
-                System.out.println("Opção inválida, tente novamente!");
+                System.out.println("Opção não disponível, tente novamente!");
             }
 
         }
